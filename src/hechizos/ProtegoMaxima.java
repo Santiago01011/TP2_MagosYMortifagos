@@ -2,6 +2,6 @@ package hechizos;
 
 public class ProtegoMaxima extends HechizoDefensa {
 	public ProtegoMaxima() {
-		super("Protego Maxima", 2);
+		super("Protego Maxima", 2, 50);
 	}
 }

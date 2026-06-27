@@ -3,7 +3,9 @@ package personajes;
 import java.util.ArrayList;
 import java.util.List;
 
+import efectos.EfectoEstado;
 import hechizos.Hechizo;
+import objetos.ObjetoMagico;
 
 public abstract class Personaje {
 	protected String nombre;
@@ -11,9 +13,8 @@ public abstract class Personaje {
 	protected int puntosDeVida;
 	protected int vidaMax;
 	protected List<Hechizo> hechizos;
-	protected int rondasProtegido;
-	protected String efectoEstado;
-	protected int rondasEfecto;
+	protected List<EfectoEstado> efectos;
+	protected List<ObjetoMagico> objetos;
 
 	public Personaje(String nombre, int nivelMagia, int puntosDeVida) {
 		this.nombre = nombre;
@@ -21,13 +22,16 @@ public abstract class Personaje {
 		this.puntosDeVida = puntosDeVida;
 		this.vidaMax = puntosDeVida;
 		this.hechizos = new ArrayList<>();
-		this.rondasProtegido = 0;
-		this.efectoEstado = null;
-		this.rondasEfecto = 0;
+		this.efectos = new ArrayList<>();
+		this.objetos = new ArrayList<>();
 	}
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public int getNivelMagia() {
+		return nivelMagia;
 	}
 
 	public int getPuntosDeVida() {
@@ -39,11 +43,20 @@ public abstract class Personaje {
 	}
 
 	public void recibirDaño(int daño) {
-		if (rondasProtegido > 0) {
-			daño = daño / 2; // reduce daño si está protegido
-			rondasProtegido--;
-			System.out.println("  " + nombre + " está protegido, daño reducido");
+		int dañoFinal = daño;
+		for (EfectoEstado efecto : efectos) {
+			dañoFinal = efecto.modificarDañoRecibido(dañoFinal);
 		}
+		for (ObjetoMagico objeto : objetos) {
+			dañoFinal = objeto.alRecibirDaño(dañoFinal);
+		}
+		if (dañoFinal < 0) {
+			dañoFinal = 0;
+		}
+		this.puntosDeVida = Math.max(0, this.puntosDeVida - dañoFinal);
+	}
+
+	public void recibirDañoDirecto(int daño) {
 		this.puntosDeVida = Math.max(0, this.puntosDeVida - daño);
 	}
 
@@ -51,13 +64,66 @@ public abstract class Personaje {
 		this.puntosDeVida = Math.min(vidaMax, this.puntosDeVida + cantidad);
 	}
 
-	public void aplicarProteccion(int rondas) {
-		this.rondasProtegido += rondas;
+	public void aplicarEfecto(EfectoEstado efecto) {
+		efectos.add(efecto);
 	}
 
-	public void aplicarEfectoEstado(String efecto, int rondas) {
-		this.efectoEstado = efecto;
-		this.rondasEfecto = rondas;
+	public void iniciarTurno() {
+		for (EfectoEstado efecto : efectos) {
+			efecto.alIniciarTurno(this);
+		}
+		List<EfectoEstado> activos = new ArrayList<>();
+		for (EfectoEstado efecto : efectos) {
+			if (!efecto.haExpirado()) {
+				activos.add(efecto);
+			}
+		}
+		this.efectos = activos;
+	}
+
+	public boolean puedeActuar() {
+		for (EfectoEstado efecto : efectos) {
+			if (!efecto.permiteActuar()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void equipar(ObjetoMagico objeto) {
+		objetos.add(objeto);
+	}
+
+	public void quitar(ObjetoMagico objeto) {
+		objetos.remove(objeto);
+	}
+
+	public int aplicarBonusObjetosAtaque(int daño, Hechizo hechizo) {
+		int resultado = daño;
+		for (ObjetoMagico objeto : objetos) {
+			resultado = objeto.modificarAtaque(resultado, hechizo);
+		}
+		return resultado;
+	}
+
+	public int aplicarBonusObjetosCuracion(int cura) {
+		int resultado = cura;
+		for (ObjetoMagico objeto : objetos) {
+			resultado = objeto.modificarCuracion(resultado);
+		}
+		return resultado;
+	}
+
+	public int descansar(int magiaBase) {
+		int resultado = magiaBase;
+		for (ObjetoMagico objeto : objetos) {
+			resultado = objeto.modificarDescanso(resultado);
+		}
+		this.nivelMagia += resultado;
+		return resultado;
+	}
+
+	public void alCaerAliado(Personaje caido) {
 	}
 
 	public void agregarHechizo(Hechizo hechizo) {
@@ -68,7 +134,7 @@ public abstract class Personaje {
 		return hechizos;
 	}
 
-	// Polimorfismo — cada subclase define su propio bonus
 	public abstract int aplicarBonusAtaque(int dañoBase, Hechizo hechizo);
+
 	public abstract int aplicarBonusCuracion(int curacionBase);
 }

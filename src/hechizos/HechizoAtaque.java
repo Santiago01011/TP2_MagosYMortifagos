@@ -20,6 +20,7 @@ public abstract class HechizoAtaque implements Hechizo {
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		int daño = calcularDaño();
 		daño = lanzador.aplicarBonusAtaque(daño, this);
+		daño = lanzador.aplicarBonusObjetosAtaque(daño, this);
 		objetivo.recibirDaño(daño);
 		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → " + daño + " de daño");
 	}

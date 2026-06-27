@@ -20,6 +20,7 @@ public abstract class HechizoCuracion implements Hechizo {
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		int curacion = baseCuracion;
 		curacion = lanzador.aplicarBonusCuracion(curacion);
+		curacion = lanzador.aplicarBonusObjetosCuracion(curacion);
 		objetivo.curar(curacion);
 		System.out.println(lanzador.getNombre() + " lanza " + nombre + " → +" + curacion + " de vida");
 	}
