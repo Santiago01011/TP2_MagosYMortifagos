@@ -4,5 +4,5 @@
 /**
  * 
  */
-module TP2_MagosYMortifagos {
+module Parcial_Simulacro {
 }
