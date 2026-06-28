@@ -78,10 +78,10 @@ class PersonajeTest {
     }
 
     @Test
-    void curar_desdeCeroVida() {
+    void curar_desdeCeroVida_noDebeRevivir() {
         personaje.recibirDaño(100);
         personaje.curar(40);
-        assertEquals(40, personaje.getPuntosDeVida());
+        assertEquals(0, personaje.getPuntosDeVida());
     }
 
     @Test

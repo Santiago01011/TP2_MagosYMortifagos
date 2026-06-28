@@ -59,11 +59,11 @@ class HechizoCuracionTest {
     }
 
     @Test
-    void curacion_curaPersonajeConCeroVida() {
+    void curacion_noCuraPersonajeConCeroVida() {
         objetivo.recibirDaño(100); // 0 HP
         Hechizo expecto = new ExpectoPatronum();
         expecto.ejecutar(lanzador, objetivo);
-        // 0 + 40 = 40
-        assertEquals(40, objetivo.getPuntosDeVida());
+        // No debe curarse porque está eliminado (0 HP)
+        assertEquals(0, objetivo.getPuntosDeVida());
     }
 }

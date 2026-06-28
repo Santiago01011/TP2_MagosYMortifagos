@@ -12,12 +12,16 @@ import personajes.Personaje;
 
 public class Batallon {
 	private List<Personaje> personajes;
-	private Map<Personaje, Set<Hechizo>> usadosEnRonda;
+	private Set<String> hechizosUsadosEnTurno;
+	private Map<Personaje, List<Hechizo>> historialHechizos;
+	private List<String> secuenciaAcciones;
 	private Random rand;
 
 	public Batallon() {
 		this.personajes = new ArrayList<>();
-		this.usadosEnRonda = new HashMap<>();
+		this.hechizosUsadosEnTurno = new HashSet<>();
+		this.historialHechizos = new HashMap<>();
+		this.secuenciaAcciones = new ArrayList<>();
 		this.rand = new Random();
 	}
 
@@ -35,7 +39,7 @@ public class Batallon {
 	}
 
 	public void atacar(Batallon enemigo) {
-		usadosEnRonda.clear();
+		hechizosUsadosEnTurno.clear();
 
 		for (Personaje atacante : personajes) {
 			if (!atacante.estaVivo()) {
@@ -53,23 +57,29 @@ public class Batallon {
 				continue;
 			}
 			if (!podiaActuar) {
-				System.out.println(atacante.getNombre() + " está paralizado y pierde el turno");
+				String logInfo = atacante.getNombre() + " está paralizado y pierde el turno";
+				System.out.println(logInfo);
+				secuenciaAcciones.add(logInfo);
 				continue;
 			}
 
 			Hechizo hechizo = elegirHechizo(atacante);
 			if (hechizo == null) {
+				String logInfo = atacante.getNombre() + " no tiene hechizos disponibles para lanzar en este turno";
+				System.out.println(logInfo);
+				secuenciaAcciones.add(logInfo);
 				continue;
 			}
 			registrarUso(atacante, hechizo);
 
-			Personaje objetivo = elegirObjetivo(enemigo);
+			Personaje objetivo = hechizo.seleccionarObjetivo(atacante, this.personajes, enemigo.personajes);
 			if (objetivo == null) {
 				continue;
 			}
 			boolean objetivoVivoAntes = objetivo.estaVivo();
 
 			hechizo.ejecutar(atacante, objetivo);
+			secuenciaAcciones.add(atacante.getNombre() + " lanzó " + hechizo.nombre() + " a " + objetivo.getNombre());
 
 			if (objetivoVivoAntes && !objetivo.estaVivo()) {
 				enemigo.notificarCaida(objetivo);
@@ -78,6 +88,8 @@ public class Batallon {
 	}
 
 	public void notificarCaida(Personaje caido) {
+		String logInfo = "¡" + caido.getNombre() + " ha caído en combate!";
+		secuenciaAcciones.add(logInfo);
 		for (Personaje personaje : personajes) {
 			if (personaje != caido && personaje.estaVivo()) {
 				personaje.alCaerAliado(caido);
@@ -86,13 +98,9 @@ public class Batallon {
 	}
 
 	private Hechizo elegirHechizo(Personaje atacante) {
-		Set<Hechizo> usados = usadosEnRonda.get(atacante);
-		if (usados == null) {
-			usados = new HashSet<>();
-		}
 		List<Hechizo> disponibles = new ArrayList<>();
 		for (Hechizo hechizo : atacante.getHechizos()) {
-			if (!usados.contains(hechizo)) {
+			if (!hechizosUsadosEnTurno.contains(hechizo.nombre().toLowerCase())) {
 				disponibles.add(hechizo);
 			}
 		}
@@ -103,22 +111,19 @@ public class Batallon {
 	}
 
 	private void registrarUso(Personaje atacante, Hechizo hechizo) {
-		if (!usadosEnRonda.containsKey(atacante)) {
-			usadosEnRonda.put(atacante, new HashSet<>());
-		}
-		usadosEnRonda.get(atacante).add(hechizo);
+		hechizosUsadosEnTurno.add(hechizo.nombre().toLowerCase());
+		historialHechizos.computeIfAbsent(atacante, k -> new ArrayList<>()).add(hechizo);
 	}
 
-	private Personaje elegirObjetivo(Batallon enemigo) {
-		List<Personaje> vivos = new ArrayList<>();
-		for (Personaje personaje : enemigo.personajes) {
-			if (personaje.estaVivo()) {
-				vivos.add(personaje);
-			}
-		}
-		if (vivos.isEmpty()) {
-			return null;
-		}
-		return vivos.get(rand.nextInt(vivos.size()));
+	public List<Personaje> getPersonajes() {
+		return personajes;
+	}
+
+	public Map<Personaje, List<Hechizo>> getHistorialHechizos() {
+		return historialHechizos;
+	}
+
+	public List<String> getSecuenciaAcciones() {
+		return secuenciaAcciones;
 	}
 }

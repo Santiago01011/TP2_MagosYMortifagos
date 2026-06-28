@@ -8,11 +8,12 @@ public class AvadaKedavra extends HechizoAtaque {
 	}
 
 	@Override
-	public void ejecutar(Personaje lanzador, Personaje objetivo) {
-		int daño = calcularDaño();
-		daño = lanzador.aplicarBonusAtaque(daño, this);
-		daño = lanzador.aplicarBonusObjetosAtaque(daño, this);
+	protected void aplicarDaño(Personaje objetivo, int daño) {
 		objetivo.recibirDañoDirecto(daño);
+	}
+
+	@Override
+	protected void imprimirLog(Personaje lanzador, Personaje objetivo, int daño) {
 		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → " + daño + " de daño (ignora defensa)");
 	}
 

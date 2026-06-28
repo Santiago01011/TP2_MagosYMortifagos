@@ -61,10 +61,16 @@ public abstract class Personaje {
 	}
 
 	public void curar(int cantidad) {
+		if (!estaVivo()) {
+			return;
+		}
 		this.puntosDeVida = Math.min(vidaMax, this.puntosDeVida + cantidad);
 	}
 
 	public void aplicarEfecto(EfectoEstado efecto) {
+		if (!estaVivo()) {
+			return;
+		}
 		efectos.add(efecto);
 	}
 

@@ -21,8 +21,13 @@ public abstract class HechizoDefensa implements Hechizo {
 
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
-		lanzador.aplicarEfecto(new Escudo(reduccion, duracionEnRondas));
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " → escudo del " + reduccion + "% por " + duracionEnRondas + " ronda(s)");
+		objetivo.aplicarEfecto(new Escudo(reduccion, duracionEnRondas));
+		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → escudo del " + reduccion + "% por " + duracionEnRondas + " ronda(s)");
+	}
+
+	@Override
+	public Personaje seleccionarObjetivo(Personaje lanzador, java.util.List<Personaje> aliados, java.util.List<Personaje> enemigos) {
+		return lanzador;
 	}
 
 	@Override

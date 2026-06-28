@@ -22,7 +22,22 @@ public abstract class HechizoCuracion implements Hechizo {
 		curacion = lanzador.aplicarBonusCuracion(curacion);
 		curacion = lanzador.aplicarBonusObjetosCuracion(curacion);
 		objetivo.curar(curacion);
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " → +" + curacion + " de vida");
+		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → +" + curacion + " de vida");
+	}
+
+	@Override
+	public Personaje seleccionarObjetivo(Personaje lanzador, java.util.List<Personaje> aliados, java.util.List<Personaje> enemigos) {
+		java.util.List<Personaje> vivos = aliados.stream().filter(Personaje::estaVivo).toList();
+		if (vivos.isEmpty()) {
+			return null;
+		}
+		Personaje masHerido = vivos.get(0);
+		for (Personaje p : vivos) {
+			if (p.getPuntosDeVida() < masHerido.getPuntosDeVida()) {
+				masHerido = p;
+			}
+		}
+		return masHerido;
 	}
 
 	@Override
