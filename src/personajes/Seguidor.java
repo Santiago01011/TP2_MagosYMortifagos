@@ -10,13 +10,8 @@ public class Seguidor extends Mortifago {
 
     @Override
     public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
-        // Seguidores son menos especializados: pequeño bonus en oscuridad
         int base = super.aplicarBonusAtaque(dañoBase, hechizo);
         return base + (hechizo.esOscuridad() ? (nivelMagia / 5) : 0);
     }
 
-    @Override
-    public int aplicarBonusCuracion(int curacionBase) {
-        return super.aplicarBonusCuracion(curacionBase);
-    }
 }

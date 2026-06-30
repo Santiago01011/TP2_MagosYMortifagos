@@ -10,13 +10,11 @@ public class Mortifago extends Personaje {
 
 	@Override
 	public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
-		// Mortífagos son más letales con hechizos oscuros
 		return hechizo.esOscuridad() ? dañoBase + (nivelMagia / 2) : dañoBase;
 	}
 
 	@Override
 	public int aplicarBonusCuracion(int curacionBase) {
-		// Mortífagos no curan tan bien
 		return curacionBase / 2;
 	}
 }

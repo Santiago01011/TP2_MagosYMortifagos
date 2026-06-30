@@ -18,9 +18,7 @@ public abstract class HechizoAtaque implements Hechizo {
 
 	@Override
 	public String ejecutar(Personaje lanzador, Personaje objetivo) {
-		int daño = calcularDaño();
-		daño = lanzador.aplicarBonusAtaque(daño, this);
-		daño = lanzador.aplicarBonusObjetosAtaque(daño, this);
+		int daño = lanzador.calcularDañoFinal(calcularDaño(), this);
 		aplicarDaño(objetivo, daño);
 		aplicarEfectosAdicionales(objetivo);
 		return obtenerLog(lanzador, objetivo, daño);

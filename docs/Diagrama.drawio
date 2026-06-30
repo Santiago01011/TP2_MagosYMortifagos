@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="gON7ijsmuO8WF_-Mziit" name="Page-1">
-        <mxGraphModel dx="1159" dy="1397" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1722" dy="1561" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -93,14 +93,14 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="280" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;«abstract»&lt;br&gt;&lt;/span&gt;Mago" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1420" y="1164" width="200" height="74" as="geometry"/>
+                <mxCell id="280" value="Mago" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=24;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1420" y="1164" width="200" height="58" as="geometry"/>
                 </mxCell>
                 <mxCell id="281" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="280" vertex="1">
-                    <mxGeometry y="40" width="200" height="8" as="geometry"/>
+                    <mxGeometry y="24" width="200" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="282" value="+ aplicarBonusCuracion(...): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="280" vertex="1">
-                    <mxGeometry y="48" width="200" height="26" as="geometry"/>
+                    <mxGeometry y="32" width="200" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="283" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;startArrow=none;startFill=0;" parent="1" source="357" target="285" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -108,14 +108,14 @@
                 <mxCell id="284" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;startArrow=none;startFill=0;" parent="1" source="359" target="285" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="285" value="Mortífago" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="886" y="1164" width="200" height="74" as="geometry"/>
+                <mxCell id="285" value="Mortífago" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="886" y="1164" width="200" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="286" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="285" vertex="1">
-                    <mxGeometry y="40" width="200" height="8" as="geometry"/>
+                    <mxGeometry y="26" width="200" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="287" value="+ aplicarBonusAtaque(...): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="285" vertex="1">
-                    <mxGeometry y="48" width="200" height="26" as="geometry"/>
+                    <mxGeometry y="34" width="200" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="288" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=0;startArrow=none;startFill=0;" parent="1" source="280" target="260" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -637,12 +637,6 @@
                     <mxGeometry x="0.6" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="429" value="&lt;b&gt;Reclutador (Factory)&lt;/b&gt;&lt;br&gt;&lt;br&gt;crearMago() → al azar:&lt;br&gt;Auror | Estudiante | Profesor&lt;br&gt;&lt;br&gt;crearMortifago() → al azar:&lt;br&gt;Seguidor | Comandante&lt;br&gt;&lt;br&gt;El switch/if para elegir qué subclase&lt;br&gt;instanciar vive solo acá (no es&lt;br&gt;&amp;quot;preguntar el tipo&amp;quot;). Mago/Mortífago&lt;br&gt;ya no se instancian directamente." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;" parent="1" vertex="1">
-                    <mxGeometry x="1880" y="560" width="330" height="190" as="geometry"/>
-                </mxCell>
-                <mxCell id="430" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;startArrow=none;dashed=1;" parent="1" source="429" target="328" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

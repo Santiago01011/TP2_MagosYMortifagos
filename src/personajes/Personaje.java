@@ -120,6 +120,16 @@ public abstract class Personaje {
 		return resultado;
 	}
 
+	public int calcularDañoFinal(int dañoBase, Hechizo hechizo) {
+		int dañoConBonus = aplicarBonusAtaque(dañoBase, hechizo);
+		return aplicarBonusObjetosAtaque(dañoConBonus, hechizo);
+	}
+
+	public int calcularCuracionFinal(int curacionBase) {
+		int curacionConBonus = aplicarBonusCuracion(curacionBase);
+		return aplicarBonusObjetosCuracion(curacionConBonus);
+	}
+
 	public int descansar(int magiaBase) {
 		int resultado = magiaBase;
 		for (ObjetoMagico objeto : objetos) {
