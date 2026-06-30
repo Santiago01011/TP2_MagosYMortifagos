@@ -19,22 +19,23 @@ class HechizoCuracionTest {
     // ── Expecto Patronum ──
 
     @Test
-    void expectoPatronum_curaBase40() {
-        objetivo.recibirDaño(60); // 40 HP restantes
+    void expectoPatronum_curaBase100() {
+        objetivo.recibirDaño(90); // 10 HP restantes
         Hechizo expecto = new ExpectoPatronum();
         expecto.ejecutar(lanzador, objetivo);
-        // 40 + 40 = 80
-        assertEquals(80, objetivo.getPuntosDeVida());
+        // 10 + 100 = 110, capped at 100
+        assertEquals(100, objetivo.getPuntosDeVida());
     }
 
     @Test
     void expectoPatronum_conBonusCuracion_curaMas() {
+        objetivo = new PersonajeStub("Objetivo", 30, 200);
         lanzador.setBonusCuracionFijo(15);
-        objetivo.recibirDaño(60); // 40 HP restantes
+        objetivo.recibirDaño(150); // 50 HP restantes
         Hechizo expecto = new ExpectoPatronum();
         expecto.ejecutar(lanzador, objetivo);
-        // 40 + 40 + 15 = 95
-        assertEquals(95, objetivo.getPuntosDeVida());
+        // 50 + 100 + 15 = 165
+        assertEquals(165, objetivo.getPuntosDeVida());
     }
 
     @Test
@@ -42,7 +43,7 @@ class HechizoCuracionTest {
         objetivo.recibirDaño(10); // 90 HP restantes
         Hechizo expecto = new ExpectoPatronum();
         expecto.ejecutar(lanzador, objetivo);
-        // 90 + 40 = 130, pero vidaMax = 100
+        // 90 + 100 = 190, pero vidaMax = 100
         assertEquals(100, objetivo.getPuntosDeVida());
     }
 

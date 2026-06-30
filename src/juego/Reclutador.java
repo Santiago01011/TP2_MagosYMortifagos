@@ -16,7 +16,7 @@ public class Reclutador {
 		String[] nombres = {"Harry", "Hermione", "Dumbledore", "McGonagall", "Luna"};
 		String nombre = nombres[(int) (Math.random() * nombres.length)];
 		int nivelMagia = 30 + (int) (Math.random() * 40); // 30-69
-		int vida = 80 + (int) (Math.random() * 40); // 80-119
+		int vida = 200 + (int) (Math.random() * 100); // 200-299
 
 		int tipo = (int) (Math.random() * 3);
 		Mago mago;
@@ -42,7 +42,7 @@ public class Reclutador {
 		String[] nombres = {"Voldemort", "Bellatrix", "Lucius", "Wormtail", "Draco"};
 		String nombre = nombres[(int) (Math.random() * nombres.length)];
 		int nivelMagia = 30 + (int) (Math.random() * 40); // 30-69
-		int vida = 80 + (int) (Math.random() * 40); // 80-119
+		int vida = 200 + (int) (Math.random() * 100); // 200-299
 
 		int tipo = (int) (Math.random() * 2);
 		Mortifago mortifago;

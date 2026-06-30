@@ -4,7 +4,7 @@ import personajes.Personaje;
 
 public class AvadaKedavra extends HechizoAtaque {
 	public AvadaKedavra() {
-		super("Avada Kedavra", 100);
+		super("Avada Kedavra", 40);
 	}
 
 	@Override
@@ -13,8 +13,8 @@ public class AvadaKedavra extends HechizoAtaque {
 	}
 
 	@Override
-	protected void imprimirLog(Personaje lanzador, Personaje objetivo, int daño) {
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → " + daño + " de daño (ignora defensa)");
+	protected String obtenerLog(Personaje lanzador, Personaje objetivo, int daño) {
+		return lanzador.getNombre() + " lanza " + this + " a " + objetivo.getNombre() + " → " + daño + " de daño (ignora defensa)";
 	}
 
 	@Override

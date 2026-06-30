@@ -19,10 +19,10 @@ class HechizoAtaqueTest {
 
 
     @Test
-    void expelliarmus_aplicaDañoBase20() {
+    void expelliarmus_aplicaDañoBase80() {
         Hechizo expelliarmus = new Expelliarmus();
         expelliarmus.ejecutar(lanzador, objetivo);
-        assertEquals(80, objetivo.getPuntosDeVida());
+        assertEquals(20, objetivo.getPuntosDeVida());
     }
 
     @Test
@@ -30,7 +30,7 @@ class HechizoAtaqueTest {
         lanzador.setBonusAtaqueFijo(10);
         Hechizo expelliarmus = new Expelliarmus();
         expelliarmus.ejecutar(lanzador, objetivo);
-        assertEquals(70, objetivo.getPuntosDeVida());
+        assertEquals(10, objetivo.getPuntosDeVida());
     }
 
     @Test
@@ -47,15 +47,16 @@ class HechizoAtaqueTest {
 
 
     @Test
-    void avadaKedavra_aplicaDañoBase100() {
+    void avadaKedavra_aplicaDañoBase40() {
         objetivo = new PersonajeStub("Objetivo", 30, 200);
         Hechizo avada = new AvadaKedavra();
         avada.ejecutar(lanzador, objetivo);
-        assertEquals(100, objetivo.getPuntosDeVida());
+        assertEquals(160, objetivo.getPuntosDeVida());
     }
 
     @Test
-    void avadaKedavra_mataCon100Daño() {
+    void avadaKedavra_mataCon40Daño() {
+        objetivo = new PersonajeStub("Objetivo", 30, 40);
         Hechizo avada = new AvadaKedavra();
         avada.ejecutar(lanzador, objetivo);
         assertEquals(0, objetivo.getPuntosDeVida());
@@ -75,17 +76,17 @@ class HechizoAtaqueTest {
     }
 
     @Test
-    void crucio_aplicaDañoBase30() {
+    void crucio_aplicaDañoBase15() {
         Hechizo crucio = new Crucio();
         crucio.ejecutar(lanzador, objetivo);
-        assertEquals(70, objetivo.getPuntosDeVida());
+        assertEquals(85, objetivo.getPuntosDeVida());
     }
 
     @Test
     void crucio_aplicaEfectoEstadoDolor() {
         Hechizo crucio = new Crucio();
         crucio.ejecutar(lanzador, objetivo);
-        assertEquals(70, objetivo.getPuntosDeVida());
+        assertEquals(85, objetivo.getPuntosDeVida());
     }
 
     @Test

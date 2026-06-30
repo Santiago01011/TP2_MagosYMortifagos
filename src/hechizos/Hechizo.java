@@ -4,7 +4,7 @@ import personajes.Personaje;
 
 public interface Hechizo {
 	String nombre();
-	void ejecutar(Personaje lanzador, Personaje objetivo);
+	String ejecutar(Personaje lanzador, Personaje objetivo);
 	boolean esOscuridad();
 
 	default Personaje seleccionarObjetivo(Personaje lanzador, java.util.List<Personaje> aliados, java.util.List<Personaje> enemigos) {

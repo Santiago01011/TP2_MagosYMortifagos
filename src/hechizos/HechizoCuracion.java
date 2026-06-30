@@ -17,12 +17,12 @@ public abstract class HechizoCuracion implements Hechizo {
 	}
 
 	@Override
-	public void ejecutar(Personaje lanzador, Personaje objetivo) {
+	public String ejecutar(Personaje lanzador, Personaje objetivo) {
 		int curacion = baseCuracion;
 		curacion = lanzador.aplicarBonusCuracion(curacion);
 		curacion = lanzador.aplicarBonusObjetosCuracion(curacion);
 		objetivo.curar(curacion);
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → +" + curacion + " de vida");
+		return lanzador.getNombre() + " lanza " + this + " a " + objetivo.getNombre() + " → +" + curacion + " de vida";
 	}
 
 	@Override
@@ -43,5 +43,10 @@ public abstract class HechizoCuracion implements Hechizo {
 	@Override
 	public boolean esOscuridad() {
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
 	}
 }
