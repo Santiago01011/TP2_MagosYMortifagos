@@ -78,8 +78,9 @@ public class Batallon {
 			}
 			boolean objetivoVivoAntes = objetivo.estaVivo();
 
-			hechizo.ejecutar(atacante, objetivo);
-			secuenciaAcciones.add(atacante.getNombre() + " lanzó " + hechizo.nombre() + " a " + objetivo.getNombre());
+			String logInfo = hechizo.ejecutar(atacante, objetivo);
+			System.out.println(logInfo);
+			secuenciaAcciones.add(logInfo);
 
 			if (objetivoVivoAntes && !objetivo.estaVivo()) {
 				enemigo.notificarCaida(objetivo);

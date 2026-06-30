@@ -5,7 +5,7 @@ import personajes.Personaje;
 
 public class Crucio extends HechizoAtaque {
 	public Crucio() {
-		super("Crucio", 30);
+		super("Crucio", 15);
 	}
 
 	@Override
@@ -14,8 +14,8 @@ public class Crucio extends HechizoAtaque {
 	}
 
 	@Override
-	protected void imprimirLog(Personaje lanzador, Personaje objetivo, int daño) {
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → " + daño + " de daño y deja sangrado");
+	protected String obtenerLog(Personaje lanzador, Personaje objetivo, int daño) {
+		return lanzador.getNombre() + " lanza " + this + " a " + objetivo.getNombre() + " → " + daño + " de daño y deja sangrado";
 	}
 
 	@Override

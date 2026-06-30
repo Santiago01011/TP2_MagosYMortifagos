@@ -2,6 +2,6 @@ package hechizos;
 
 public class Expelliarmus extends HechizoAtaque {
 	public Expelliarmus() {
-		super("Expelliarmus", 20);
+		super("Expelliarmus", 80);
 	}
 }

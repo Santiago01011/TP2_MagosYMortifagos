@@ -17,13 +17,13 @@ public abstract class HechizoAtaque implements Hechizo {
 	}
 
 	@Override
-	public void ejecutar(Personaje lanzador, Personaje objetivo) {
+	public String ejecutar(Personaje lanzador, Personaje objetivo) {
 		int daño = calcularDaño();
 		daño = lanzador.aplicarBonusAtaque(daño, this);
 		daño = lanzador.aplicarBonusObjetosAtaque(daño, this);
 		aplicarDaño(objetivo, daño);
 		aplicarEfectosAdicionales(objetivo);
-		imprimirLog(lanzador, objetivo, daño);
+		return obtenerLog(lanzador, objetivo, daño);
 	}
 
 	protected int calcularDaño() {
@@ -36,8 +36,8 @@ public abstract class HechizoAtaque implements Hechizo {
 
 	protected void aplicarEfectosAdicionales(Personaje objetivo) {}
 
-	protected void imprimirLog(Personaje lanzador, Personaje objetivo, int daño) {
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → " + daño + " de daño");
+	protected String obtenerLog(Personaje lanzador, Personaje objetivo, int daño) {
+		return lanzador.getNombre() + " lanza " + this + " a " + objetivo.getNombre() + " → " + daño + " de daño";
 	}
 
 	@Override
@@ -53,5 +53,9 @@ public abstract class HechizoAtaque implements Hechizo {
 	public boolean esOscuridad() {
 		return false;
 	}
-}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+}

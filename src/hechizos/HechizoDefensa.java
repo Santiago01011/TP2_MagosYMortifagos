@@ -20,9 +20,9 @@ public abstract class HechizoDefensa implements Hechizo {
 	}
 
 	@Override
-	public void ejecutar(Personaje lanzador, Personaje objetivo) {
+	public String ejecutar(Personaje lanzador, Personaje objetivo) {
 		objetivo.aplicarEfecto(new Escudo(reduccion, duracionEnRondas));
-		System.out.println(lanzador.getNombre() + " lanza " + nombre + " a " + objetivo.getNombre() + " → escudo del " + reduccion + "% por " + duracionEnRondas + " ronda(s)");
+		return lanzador.getNombre() + " lanza " + this + " a " + objetivo.getNombre() + " → escudo del " + reduccion + "% por " + duracionEnRondas + " ronda(s)";
 	}
 
 	@Override
@@ -33,5 +33,10 @@ public abstract class HechizoDefensa implements Hechizo {
 	@Override
 	public boolean esOscuridad() {
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
 	}
 }
