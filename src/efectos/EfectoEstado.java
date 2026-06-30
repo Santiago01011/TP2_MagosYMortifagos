@@ -1,6 +1,7 @@
 package efectos;
 
 import personajes.Personaje;
+import hechizos.Hechizo;
 
 public interface EfectoEstado {
 
@@ -8,6 +9,10 @@ public interface EfectoEstado {
 	}
 
 	default int modificarDañoRecibido(int daño) {
+		return daño;
+	}
+
+	default int modificarAtaque(int daño, Hechizo hechizo, Personaje lanzador) {
 		return daño;
 	}
 

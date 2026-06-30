@@ -25,21 +25,21 @@ class ComandanteReactivoTest {
     @Test
     void alCaerAliado_activaFuria() {
         Personaje aliado = new Seguidor("Colagusano", 30, 1);
-        comandante.alCaerAliado(aliado);
+        comandante.alCaerAliado();
         assertTrue(comandante.tieneFuriaActiva());
     }
 
     @Test
     void furia_potenciaElProximoAtaque() {
         Personaje aliado = new Seguidor("Colagusano", 30, 1);
-        comandante.alCaerAliado(aliado);
+        comandante.alCaerAliado();
         assertEquals(220, comandante.aplicarBonusAtaque(100, oscuro));
     }
 
     @Test
     void furia_seConsumeTrasUnAtaque() {
         Personaje aliado = new Seguidor("Colagusano", 30, 1);
-        comandante.alCaerAliado(aliado);
+        comandante.alCaerAliado();
         comandante.aplicarBonusAtaque(100, oscuro);
         assertFalse(comandante.tieneFuriaActiva());
         assertEquals(160, comandante.aplicarBonusAtaque(100, oscuro));
@@ -49,7 +49,7 @@ class ComandanteReactivoTest {
     void comandanteMuerto_noEntraEnFuria() {
         comandante.recibirDaño(100);
         Personaje aliado = new Seguidor("Colagusano", 30, 1);
-        comandante.alCaerAliado(aliado);
+        comandante.alCaerAliado();
         assertFalse(comandante.tieneFuriaActiva());
     }
 }

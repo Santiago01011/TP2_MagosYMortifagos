@@ -4,6 +4,7 @@ import hechizos.ForjadorHechizos;
 import personajes.Auror;
 import personajes.Comandante;
 import personajes.Estudiante;
+import personajes.LiderOrden;
 import personajes.Mago;
 import personajes.Mortifago;
 import personajes.Personaje;
@@ -18,19 +19,14 @@ public class Reclutador {
 		int nivelMagia = 30 + (int) (Math.random() * 40); // 30-69
 		int vida = 200 + (int) (Math.random() * 100); // 200-299
 
-		int tipo = (int) (Math.random() * 3);
+		int tipo = (int) (Math.random() * 4);
 		Mago mago;
-		switch (tipo) {
-			case 0:
-				mago = new Auror(nombre, nivelMagia, vida);
-				break;
-			case 1:
-				mago = new Estudiante(nombre, nivelMagia, vida);
-				break;
-			default:
-				mago = new Profesor(nombre, nivelMagia, vida);
-				break;
-		}
+                mago = switch (tipo) {
+                case 0 -> new Auror(nombre, nivelMagia, vida);
+                case 1 -> new Estudiante(nombre, nivelMagia, vida);
+                case 2 -> new Profesor(nombre, nivelMagia, vida);
+                default -> new LiderOrden(nombre, nivelMagia, vida);
+            };
 
 		mago.agregarHechizo(ForjadorHechizos.crear("expelliarmus"));
 		mago.agregarHechizo(ForjadorHechizos.crear("protego"));
@@ -41,8 +37,8 @@ public class Reclutador {
 	public static Personaje crearMortifago() {
 		String[] nombres = {"Voldemort", "Bellatrix", "Lucius", "Wormtail", "Draco"};
 		String nombre = nombres[(int) (Math.random() * nombres.length)];
-		int nivelMagia = 30 + (int) (Math.random() * 40); // 30-69
-		int vida = 200 + (int) (Math.random() * 100); // 200-299
+		int nivelMagia = 30 + (int) (Math.random() * 40);
+		int vida = 200 + (int) (Math.random() * 100);
 
 		int tipo = (int) (Math.random() * 2);
 		Mortifago mortifago;

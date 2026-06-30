@@ -122,6 +122,9 @@ public abstract class Personaje {
 
 	public int calcularDañoFinal(int dañoBase, Hechizo hechizo) {
 		int dañoConBonus = aplicarBonusAtaque(dañoBase, hechizo);
+		for (EfectoEstado efecto : efectos) {
+			dañoConBonus = efecto.modificarAtaque(dañoConBonus, hechizo, this);
+		}
 		return aplicarBonusObjetosAtaque(dañoConBonus, hechizo);
 	}
 
@@ -139,7 +142,10 @@ public abstract class Personaje {
 		return resultado;
 	}
 
-	public void alCaerAliado(Personaje caido) {
+	public void alCaerAliado() { }
+
+	public String reaccionAlCaerAliado(Personaje caido) {
+		return "";
 	}
 
 	public void agregarHechizo(Hechizo hechizo) {

@@ -10,9 +10,7 @@ public class Profesor extends Mago {
 
     @Override
     public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
-        // Profesores son versátiles: buen ataque y curación
-        int base = super.aplicarBonusAtaque(dañoBase, hechizo);
-        return base + (nivelMagia / 4);
+        return super.aplicarBonusAtaque(dañoBase, hechizo) + (nivelMagia / 4);
     }
 
     @Override

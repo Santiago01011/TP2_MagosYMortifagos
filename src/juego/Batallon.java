@@ -90,10 +90,16 @@ public class Batallon {
 
 	public void notificarCaida(Personaje caido) {
 		String logInfo = "¡" + caido.getNombre() + " ha caído en combate!";
+		System.out.println(logInfo);
 		secuenciaAcciones.add(logInfo);
 		for (Personaje personaje : personajes) {
 			if (personaje != caido && personaje.estaVivo()) {
-				personaje.alCaerAliado(caido);
+				String reaccion = personaje.reaccionAlCaerAliado(caido);
+				if (!reaccion.isBlank()) {
+					System.out.println(reaccion);
+					secuenciaAcciones.add(reaccion);
+				}
+				personaje.alCaerAliado();
 			}
 		}
 	}
