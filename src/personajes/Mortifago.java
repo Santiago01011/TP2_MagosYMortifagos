@@ -10,7 +10,7 @@ public class Mortifago extends Personaje {
 
 	@Override
 	public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
-		return hechizo.esOscuridad() ? dañoBase + (nivelMagia / 2) : dañoBase;
+		return hechizo.esOscuridad() ? dañoBase + (nivelMagia) : dañoBase;
 	}
 
 	@Override

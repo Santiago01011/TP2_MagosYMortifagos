@@ -4,7 +4,6 @@ import hechizos.ForjadorHechizos;
 import personajes.Auror;
 import personajes.Comandante;
 import personajes.Estudiante;
-import personajes.LiderOrden;
 import personajes.Mago;
 import personajes.Mortifago;
 import personajes.Personaje;
@@ -19,13 +18,12 @@ public class Reclutador {
 		int nivelMagia = 30 + (int) (Math.random() * 40); // 30-69
 		int vida = 200 + (int) (Math.random() * 100); // 200-299
 
-		int tipo = (int) (Math.random() * 4);
+		int tipo = (int) (Math.random() * 3);
 		Mago mago;
                 mago = switch (tipo) {
                 case 0 -> new Auror(nombre, nivelMagia, vida);
                 case 1 -> new Estudiante(nombre, nivelMagia, vida);
-                case 2 -> new Profesor(nombre, nivelMagia, vida);
-                default -> new LiderOrden(nombre, nivelMagia, vida);
+                default -> new Profesor(nombre, nivelMagia, vida);
             };
 
 		mago.agregarHechizo(ForjadorHechizos.crear("expelliarmus"));

@@ -7,7 +7,7 @@ public class BatallaMagosVsMortifagos {
 	public static void main(String[] args) {
 		Batallon batallonMagos = new Batallon();
 		Batallon batallonMortifagos = new Batallon();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			batallonMagos.agregarPersonaje(Reclutador.crearMago());
 			batallonMortifagos.agregarPersonaje(Reclutador.crearMortifago());
 		}
@@ -24,6 +24,8 @@ public class BatallaMagosVsMortifagos {
 					batallonMagos.atacar(batallonMortifagos);
 				}
 			}
+			batallonMagos.mostrarEstado("Magos");
+			batallonMortifagos.mostrarEstado("Mortífagos");
 			System.out.println("----------------------------");
 		}
 		if (batallonMagos.tienePersonajesSaludables()) {

@@ -1,5 +1,6 @@
 package juego;
 
+import efectos.EfectoEstado;
 import hechizos.Hechizo;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,6 +121,30 @@ public class Batallon {
 	private void registrarUso(Personaje atacante, Hechizo hechizo) {
 		hechizosUsadosEnTurno.add(hechizo.nombre().toLowerCase());
 		historialHechizos.computeIfAbsent(atacante, k -> new ArrayList<>()).add(hechizo);
+	}
+
+	public void mostrarEstado(String nombre) {
+		System.out.println("Estado del batallón " + nombre + ":");
+		for (Personaje personaje : personajes) {
+			if (personaje.estaVivo()) {
+				String linea = "  " + personaje.getNombre() + " - Vida: " + personaje.getPuntosDeVida()
+						+ " - Magia: " + personaje.getNivelMagia();
+				List<EfectoEstado> efectos = personaje.getEfectos();
+				if (!efectos.isEmpty()) {
+					StringBuilder nombresEfectos = new StringBuilder();
+					for (int i = 0; i < efectos.size(); i++) {
+						if (i > 0) {
+							nombresEfectos.append(", ");
+						}
+						nombresEfectos.append(efectos.get(i).getNombre());
+					}
+					linea += " - Efectos: " + nombresEfectos;
+				}
+				System.out.println(linea);
+			} else {
+				System.out.println("  " + personaje.getNombre() + " - Caído");
+			}
+		}
 	}
 
 	public List<Personaje> getPersonajes() {

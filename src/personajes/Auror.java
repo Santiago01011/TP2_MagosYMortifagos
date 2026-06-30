@@ -1,5 +1,6 @@
 package personajes;
 
+import efectos.Escudo;
 import hechizos.Hechizo;
 
 public class Auror extends Mago {
@@ -10,8 +11,19 @@ public class Auror extends Mago {
 
     @Override
     public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
-        int base = super.aplicarBonusAtaque(dañoBase, hechizo);
-        return base + (nivelMagia / 3);
+        return super.aplicarBonusAtaque(dañoBase, hechizo) + (nivelMagia / 3);
+    }
+
+    @Override
+    public void alCaerAliado() {
+        if (estaVivo()) {
+            this.aplicarEfecto(new Escudo(60, 2));
+        }
+    }
+
+    @Override
+    public String reaccionAlCaerAliado(Personaje caido) {
+        return estaVivo() ? "  ¡" + nombre + " alza su varita en señal de protección por la caída de " + caido.getNombre() + "!" : "";
     }
 
 }

@@ -156,6 +156,10 @@ public abstract class Personaje {
 		return hechizos;
 	}
 
+	public List<EfectoEstado> getEfectos() {
+		return efectos;
+	}
+
 	public abstract int aplicarBonusAtaque(int dañoBase, Hechizo hechizo);
 
 	public abstract int aplicarBonusCuracion(int curacionBase);

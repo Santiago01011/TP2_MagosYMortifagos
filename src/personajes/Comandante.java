@@ -13,7 +13,13 @@ public class Comandante extends Mortifago {
 	@Override
 	public int aplicarBonusAtaque(int dañoBase, Hechizo hechizo) {
 		int base = super.aplicarBonusAtaque(dañoBase, hechizo);
-		return base + (hechizo.esOscuridad() ? (nivelMagia / 2) : (nivelMagia / 6));
+		int dañoConBonus = base + (hechizo.esOscuridad() ? (nivelMagia / 2) : (nivelMagia / 6));
+		for (EfectoEstado efecto : efectos) {
+			if (efecto instanceof Furia) {
+				dañoConBonus = efecto.modificarAtaque(dañoConBonus, hechizo, this);
+			}
+		}
+		return dañoConBonus;
 	}
 
 	@Override
@@ -30,7 +36,7 @@ public class Comandante extends Mortifago {
 
 	public boolean tieneFuriaActiva() {
 		for (EfectoEstado efecto : efectos) {
-			if (efecto.getNombre().equalsIgnoreCase("Furia")) {
+			if (efecto.getNombre().equalsIgnoreCase("Furia") && !efecto.haExpirado()) {
 				return true;
 			}
 		}
